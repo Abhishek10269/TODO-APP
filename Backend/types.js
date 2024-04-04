@@ -1,16 +1,16 @@
 // here add all zod for input validation
 
-const { z } = require('zod');
+const zod = require('zod');
 
 // Define a schema for input validation
-const createTodo = z.object({
-  title: z.string(),
-  description: z.string(),
+const createTodo = zod.object({
+  title: zod.string(),
+  description: zod.string(),
 });
 
-const updatedTodo = z.object(
+const updatedTodo = zod.object(
     {
-        id: z.string
+        id: zod.string
     }
 );
 
