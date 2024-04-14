@@ -1,29 +1,28 @@
 const express = require("express");
-const {createTodo} = require ("./types");
-const {updateTodo} = require ("./types");
-const {todo} = require("./db");
-const zod = require ("zod");
+const {createTodo,updatedTodo} = require ("./types");
+const Todo = require("./db");
+const zod = require ("zod");    
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
 
-app.post("todo/", async (req, res) => {
+app.post('/todo', async function (req, res)  {
     const createPayload = req.body;
     const parsedPayload = createTodo.safeParse(createPayload);
     if(!parsedPayload.success)
     {
         res.status(400).json(
             {
-              msg : "you sent a wrong inputs",  
+              msg : "you sent a wrong inputs whyyy",  
             }
         )
         return ;
     }
     //put it in mongo
 
-   await todo.create(
+   await Todo.create(
         {
             title: createPayload.title,
             description: createPayload.description,
@@ -37,36 +36,11 @@ app.post("todo/", async (req, res) => {
 
 })
 
-app.get("todo/", async (req, res) => {
-   const todos =  await todo.find({});
+app.get("/todo", async function (req, res)  {
+   const todos =  await Todo.find({});
+   res.json(todos);
+});
 
-})
-
-app.put("/completed",async (req,res)=>{
-    const updatePayload = req.body;
-    const parsedPayload = updateTodo.safeParse(updatePayload);
-    if(!parsedPayload.success)
-    {
-        res.status(400).json(
-            {
-              msg : "you sent a wrong inputs",  
-            }
-        )
-        return ;
-    }
-    await todo.update({
-        _id:req.body.id},
-        {completed:true}
-        )
-
-        res.json(
-            {
-                msg: "Todo marked as completed"
-            }
-        )
-
-})
-
-app.listen(port, () => {
+app.listen(port, function ()  {
     console.log("App is running on port. "+port);
 })

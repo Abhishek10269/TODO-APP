@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-mongoose.connect("mongodb+srv://shakeabhi403:PF7AzgxuIbu06vC9@cluster0.wzqqh9a.mongodb.net/todos");
+mongoose.connect("mongodb+srv://shakeabhi403:PF7AzgxuIbu06vC9@cluster0.wzqqh9a.mongodb.net/TODO");
 
 const Schema = mongoose.Schema;
 
