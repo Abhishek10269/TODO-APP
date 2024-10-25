@@ -8,7 +8,7 @@ function App() {
   return (
     <>
      <div>
-      <p>Abhishek is great</p>
+      <p>Abhishek</p>
      </div>
     </>
   )
